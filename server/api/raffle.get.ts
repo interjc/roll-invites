@@ -32,7 +32,8 @@ export default defineEventHandler(async (event) => {
     const secretCode = process.env.SECRET_CODE || null;
 
     // 判断是否售罄
-    const soldout = secretCode === null || secretCode === '';
+    const soldout =
+      secretCode === null || secretCode === "" || secretCode === "0";
 
     return {
       raffleId,
