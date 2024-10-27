@@ -14,7 +14,8 @@
 
         <div v-if="data && data.soldout" class="text-white text-center">
           <p class="text-2xl font-bold">邀请码已送完</p>
-          <p class="mt-2">请稍后再来尝试，关于 <a href="https://x.com/interjc" target="_blank" class="text-blue-300 hover:text-blue-400">@interjc</a> 的更多信息</p>
+          <p class="mt-2">请稍后再来尝试，关于 <a href="https://x.com/interjc" target="_blank"
+              class="text-blue-300 hover:text-blue-400">@interjc</a> 的更多信息</p>
         </div>
 
         <div v-else-if="!hasDrawn" class="flex justify-center">
@@ -48,7 +49,7 @@
             </p>
           </div>
 
-          <div class="flex justify-center">
+          <div v-if="!data.success" class="flex justify-center">
             <button @click="resetRaffle" :disabled="isButtonDisabled"
               class="bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-6 py-3 rounded-full transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed">
               {{ isButtonDisabled ? `请等待 ${remainingTime} 秒` : '再试一次' }}
@@ -58,10 +59,10 @@
       </div>
       <div class="pb-4">
         <p v-if="data && data.info" class="text-xs text-white text-opacity-50 mt-1 text-center">
-          {{ data.info }}
+          投放时间: {{ new Date(data.info).toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false }) }}
         </p>
         <p v-if="data && !data.soldout" class="text-xs text-white text-opacity-50 mt-1 text-center">
-          中奖概率: {{ (data.winningProbability * 100).toFixed(2) }}%
+          中奖概率: {{ (data.winningProbability * 100).toFixed(2) }}%（每小时概率递增）
         </p>
         <div class="flex justify-center space-x-4 mt-4">
           <a href="https://x.com/interjc/status/1850375761079021639" target="_blank"
@@ -83,7 +84,7 @@
 </template>
 
 <script setup>
-const { data, error, refresh } = useLazyFetch('/api/raffle', {
+const { data, pending, error, refresh } = useLazyFetch('/api/raffle', {
   key: 'raffle'
 })
 
@@ -95,7 +96,7 @@ const remainingTime = ref(0)
 const startRaffle = () => {
   isLoading.value = true
   isButtonDisabled.value = true
-  remainingTime.value = 60
+  remainingTime.value = 10
 
   setTimeout(() => {
     refresh()
