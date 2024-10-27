@@ -1,75 +1,30 @@
-# Nuxt Minimal Starter
+# Nuxt 抽奖项目
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+本项目是一个基于 Nuxt 3 的简单抽奖应用。
 
-## Setup
+## 环境配置
 
-Make sure to install dependencies:
+在运行项目之前，请确保正确配置 `.env` 文件。您可以参考 `.env.example` 文件来创建自己的 `.env` 文件。
 
-```bash
-# npm
-npm install
+需要配置的参数包括：
 
-# pnpm
-pnpm install
+- `SECRET_CODE`: 中奖后显示的激活码
+- `SECRET_INFO`: 关于激活码的附加信息
 
-# yarn
-yarn install
+## 本地开发
 
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
+执行以下命令即可启动本地开发环境：
 
 ```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
+./dev.sh
 ```
 
-## Production
+直接在浏览器中访问 `http://localhost:3000` 即可看到抽奖页面。
 
-Build the application for production:
+## 部署
 
-```bash
-# npm
-npm run build
+直接按 Nuxt 官方文档的说明操作即可。可选的部署方式包括：
 
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+- 使用 Vercel
+- 使用 Cloudflare Pages
+- 使用 Docker
