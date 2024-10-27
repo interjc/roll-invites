@@ -12,7 +12,12 @@
       <div class="p-8">
         <h1 class="text-3xl font-bold text-white mb-6 text-center">Follow.is 邀请码</h1>
 
-        <div v-if="!hasDrawn" class="flex justify-center">
+        <div v-if="data && data.soldout" class="text-white text-center">
+          <p class="text-2xl font-bold">邀请码已送完</p>
+          <p class="mt-2">请稍后再来尝试，关于 <a href="https://x.com/interjc" target="_blank" class="text-blue-300 hover:text-blue-400">@interjc</a> 的更多信息</p>
+        </div>
+
+        <div v-else-if="!hasDrawn" class="flex justify-center">
           <button @click="startRaffle" :disabled="isButtonDisabled"
             class="bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-6 py-3 rounded-full transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed">
             {{ isButtonDisabled ? `请等待 ${remainingTime} 秒` : '立即抽奖' }}
@@ -27,7 +32,7 @@
           {{ error.message }}
         </div>
 
-        <div v-else-if="data" class="space-y-6">
+        <div v-else-if="data && !data.soldout" class="space-y-6">
           <div class="p-4 rounded-lg"
             :class="data.success ? 'bg-green-400 bg-opacity-20' : 'bg-gray-400 bg-opacity-20'">
             <p class="text-2xl font-bold text-white text-center">{{ data.message }}</p>
@@ -55,7 +60,7 @@
         <p v-if="data && data.info" class="text-xs text-white text-opacity-50 mt-1 text-center">
           {{ data.info }}
         </p>
-        <p v-if="data" class="text-xs text-white text-opacity-50 mt-1 text-center">
+        <p v-if="data && !data.soldout" class="text-xs text-white text-opacity-50 mt-1 text-center">
           中奖概率: {{ (data.winningProbability * 100).toFixed(2) }}%
         </p>
         <div class="flex justify-center space-x-4 mt-4">
@@ -78,7 +83,7 @@
 </template>
 
 <script setup>
-const { data, pending, error, refresh } = useLazyFetch('/api/raffle', {
+const { data, error, refresh } = useLazyFetch('/api/raffle', {
   key: 'raffle'
 })
 

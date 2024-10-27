@@ -72,6 +72,9 @@ export default defineEventHandler(async (event) => {
     const secretCode = process.env.SECRET_CODE || null;
     const secretInfo = process.env.SECRET_INFO || null;
 
+    // 判断是否售罄
+    const soldout = secretCode === null || secretCode === '';
+
     return {
       raffleId,
       success: isWinner,
@@ -80,6 +83,7 @@ export default defineEventHandler(async (event) => {
       info: isWinner ? secretInfo : null,
       randomValue: process.env.NODE_ENV === 'development' ? randomValue : null,
       winningProbability, // 在生产环境中建议移除
+      soldout, // 新增的返回值
       time: new Date().toLocaleString("zh-CN", {
         timeZone: "Asia/Shanghai",
         year: "numeric",
