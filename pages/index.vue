@@ -20,11 +20,7 @@
               class="mt-4 font-mono bg-white bg-opacity-30 p-3 rounded-lg text-center text-white flex items-center justify-center">
               <span>激活码: {{ data.code }}</span>
               <button @click="copyCode" class="ml-2 focus:outline-none" title="复制激码">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                  stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                </svg>
+                <UIcon name="i-heroicons-clipboard" class="h-5 w-5" />
               </button>
             </div>
             <p class="text-sm text-white mt-4 text-center">
@@ -46,7 +42,18 @@
         </p>
         <p class="text-xs text-white text-opacity-50 mt-1 text-center">
           中奖概率: {{ (data.winningProbability * 100).toFixed(2) }}%
-          </p>
+        </p>
+        <div class="flex justify-center space-x-4 mt-4">
+          <a href="https://x.com/interjc" target="_blank" class="text-white hover:text-gray-200" title="关注我的 x 账号 @interjc">
+            <UIcon name="i-simple-icons-x" class="h-6 w-6" />
+          </a>
+          <a href="https://s.zhaikr.com/vj" target="_blank" class="text-white hover:text-gray-200" title="关注我的公众号 justinjapan">
+            <UIcon name="i-simple-icons-wechat" class="h-6 w-6" />
+          </a>
+          <a href="https://s.zhaikr.com/c" target="_blank" class="text-white hover:text-gray-200" title="欢迎购买 Web 开发入门课程">
+            <UIcon name="i-heroicons-academic-cap" class="h-6 w-6" />
+          </a>
+        </div>
       </div>
     </div>
   </div>
