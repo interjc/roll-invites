@@ -78,7 +78,7 @@ export default defineEventHandler(async (event) => {
       message: isWinner ? "恭喜中奖！" : "未中奖",
       code: isWinner ? secretCode : null,
       info: isWinner ? secretInfo : null,
-      randomValue, // 在生产环境中建议移除
+      randomValue: process.env.NODE_ENV === 'development' ? randomValue : null,
       winningProbability, // 在生产环境中建议移除
       time: new Date().toLocaleString("zh-CN", {
         timeZone: "Asia/Shanghai",
