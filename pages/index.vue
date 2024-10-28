@@ -18,7 +18,7 @@
               class="text-blue-300 hover:text-blue-400">@interjc</a> 的更多信息</p>
         </div>
 
-        <div v-else-if="!hasDrawn" class="flex justify-center">
+        <div v-else-if="!hasDrawn || error" class="flex justify-center">
           <button @click="startRaffle" :disabled="isButtonDisabled"
             class="bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-6 py-3 rounded-full transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed">
             {{ isButtonDisabled ? `请等待 ${remainingTime} 秒` : '立即抽奖' }}
@@ -27,10 +27,6 @@
 
         <div v-else-if="pending" class="text-white text-center">
           抽奖中...
-        </div>
-
-        <div v-else-if="error" class="text-red-300 text-center">
-          {{ error.message }}
         </div>
 
         <div v-else-if="data && !data.soldout" class="space-y-6">
@@ -111,6 +107,11 @@ const startRaffle = () => {
       }
     }, 1000)
   }, 3000)
+
+  // 如果有错误，显示错误信息
+  if (error.value) {
+    showToastMessage(error.value.message, 'error')
+  }
 }
 
 const resetRaffle = () => {
@@ -119,11 +120,11 @@ const resetRaffle = () => {
   startRaffle()
 }
 
-const showToastMessage = (message) => {
+const showToastMessage = (message, type = 'success') => {
   // 创建一个新的 toast 元素
   const toast = document.createElement('div')
   toast.textContent = message
-  toast.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded shadow-lg transition-opacity duration-300 opacity-0'
+  toast.className = `fixed bottom-4 right-4 ${type === 'error' ? 'bg-red-500' : 'bg-green-500'} text-white px-4 py-2 rounded shadow-lg transition-opacity duration-300 opacity-0`
   document.body.appendChild(toast)
 
   // 淡入效果
@@ -148,7 +149,7 @@ const copyCode = () => {
       })
       .catch(err => {
         console.error('无法复制激活码: ', err)
-        showToastMessage('复制失败，请手动复制')
+        showToastMessage('复制失败，请手动复制', 'error')
       })
   }
 }
