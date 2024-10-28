@@ -63,11 +63,11 @@
         <div class="flex justify-center space-x-4 mt-4">
           <a href="https://x.com/interjc/status/1850375761079021639" target="_blank"
             class="text-white hover:text-gray-200" title="关注我的 x 账号 @interjc">
-            <UIcon name="i-simple-icons-x" class="h-6 w-6" />
+            <UIcon name="i-heroicons-at-symbol" class="h-6 w-6" />
           </a>
           <a href="https://s.zhaikr.com/vj" target="_blank" class="text-white hover:text-gray-200"
             title="关注我的公众号 justinjapan">
-            <UIcon name="i-simple-icons-wechat" class="h-6 w-6" />
+            <UIcon name="i-heroicons-newspaper" class="h-6 w-6" />
           </a>
           <a href="https://s.zhaikr.com/c" target="_blank" class="text-white hover:text-gray-200"
             title="欢迎购买 Web 开发入门课程">
