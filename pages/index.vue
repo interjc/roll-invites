@@ -55,23 +55,28 @@
       </div>
       <div class="pb-4">
         <p v-if="data && data.info" class="text-xs text-white text-opacity-50 mt-1 text-center">
-          投放时间: {{ new Date(data.info).toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false }) }}
+          投放时间: {{ new Date(data.info).toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai', year: 'numeric', month:
+          '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false }) }}
         </p>
         <p v-if="data && !data.soldout" class="text-xs text-white text-opacity-50 mt-1 text-center">
           中奖概率: {{ (data.winningProbability * 100).toFixed(2) }}%（每小时概率递增）
         </p>
         <div class="flex justify-center space-x-4 mt-4">
-          <a href="https://x.com/interjc/status/1850375761079021639" target="_blank"
-            class="text-white hover:text-gray-200" title="关注我的 x 账号 @interjc">
-            <UIcon name="i-heroicons-at-symbol" class="h-6 w-6" />
+          <button @click="copyPowerAddress" class="text-white hover:text-gray-200"
+            :title="`Power 助力（点我复制）：${powerAddress}`">
+            <UIcon name="i-heroicons-bolt-solid" class="h-6 w-6" />
+          </button>
+          <a href="https://x.com/intent/user?screen_name=interjc
+" target="_blank" class="text-white hover:text-gray-200" title="关注我的 x 账号 @interjc">
+            <UIcon name="i-simple-icons-twitter" class="h-6 w-6" />
           </a>
           <a href="https://s.zhaikr.com/vj" target="_blank" class="text-white hover:text-gray-200"
             title="关注我的公众号 justinjapan">
-            <UIcon name="i-heroicons-newspaper" class="h-6 w-6" />
+            <UIcon name="i-simple-icons-wechat" class="h-6 w-6" />
           </a>
           <a href="https://s.zhaikr.com/c" target="_blank" class="text-white hover:text-gray-200"
             title="欢迎购买 Web 开发入门课程">
-            <UIcon name="i-heroicons-academic-cap" class="h-6 w-6" />
+            <UIcon name="i-heroicons-academic-cap-solid" class="h-6 w-6" />
           </a>
         </div>
       </div>
@@ -88,6 +93,7 @@ const isLoading = ref(false)
 const hasDrawn = ref(false)
 const isButtonDisabled = ref(false)
 const remainingTime = ref(0)
+const powerAddress = ref('0xf06fe8f03d7b52cdff043ede89ba168b5d6e72b6')
 
 const startRaffle = () => {
   isLoading.value = true
@@ -152,5 +158,16 @@ const copyCode = () => {
         showToastMessage('复制失败，请手动复制', 'error')
       })
   }
+}
+
+const copyPowerAddress = () => {
+  navigator.clipboard.writeText(powerAddress.value)
+    .then(() => {
+      showToastMessage('Power 助力地址已复制到剪贴板')
+    })
+    .catch(err => {
+      console.error('无法复制地址: ', err)
+      showToastMessage('复制失败，请手动复制', 'error')
+    })
 }
 </script>
