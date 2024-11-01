@@ -75,8 +75,12 @@
             <UIcon name="i-simple-icons-wechat" class="h-6 w-6" />
           </a>
           <a href="https://s.zhaikr.com/c" target="_blank" class="text-white hover:text-gray-200"
-            title="欢迎购买 Web 开发入门课程">
+            title="欢迎加入 Web 开发入门课程">
             <UIcon name="i-heroicons-academic-cap-solid" class="h-6 w-6" />
+          </a>
+          <a href="https://github.com/interjc/roll-invites" target="_blank" class="text-white hover:text-gray-200"
+            title="查看源代码">
+            <UIcon name="i-simple-icons-github" class="h-6 w-6" />
           </a>
         </div>
       </div>

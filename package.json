@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@iconify-json/simple-icons": "^1.2.10",
     "@nuxt/ui": "^2.18.7",
     "@types/crypto-js": "^4.2.2",
     "crypto-js": "^4.2.0",
